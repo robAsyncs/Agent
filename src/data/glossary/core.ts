@@ -1,12 +1,7 @@
-/** Short definitions shown in popovers when a highlighted term is clicked. */
-export interface GlossaryEntry {
-  term: string
-  definition: string
-  /** Topic id with more detail, shown as a link in the popover. */
-  topic?: string
-}
+import type { GlossaryEntry } from './types'
 
-export const GLOSSARY = {
+/** Terms introduced in Topic 1. Other topics reuse these ids rather than redefining them. */
+export const CORE_TERMS = {
   syntax: {
     term: 'Syntax',
     definition: 'The rules for how words combine into phrases and sentences, independent of what they mean.',
@@ -141,5 +136,3 @@ export const GLOSSARY = {
     topic: 'advanced-architectures',
   },
 } satisfies Record<string, GlossaryEntry>
-
-export type GlossaryId = keyof typeof GLOSSARY
