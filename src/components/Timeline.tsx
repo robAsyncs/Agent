@@ -39,7 +39,11 @@ export function Timeline({ steps, revealedUntil, activeIndex, onSelect, emptyHin
           <div key={lane.id} className="lifeline" style={{ left: `${center(i)}%` }} />
         ))}
 
-        {visible.length === 0 && <div className="timeline-empty">{emptyHint ?? 'Press play or → to start'}</div>}
+        {visible.length === 0 && (
+          <div className="timeline-empty">
+            <span>{emptyHint ?? 'Press play or → to start'}</span>
+          </div>
+        )}
 
         {visible.map((step, i) => {
           const from = laneIndex[step.from]
