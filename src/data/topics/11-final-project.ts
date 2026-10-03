@@ -18,7 +18,6 @@ export const finalProject: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'An end-to-end agent, deployed somewhere others can try it.',
 }

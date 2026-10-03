@@ -49,8 +49,7 @@ export const advancedArchitectures: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'A research agent where an orchestrator splits a question into subtopics, sends worker agents to research each, and combines the findings into a report.',
   scenarios: ['trip'],
   concepts: ['planning'],

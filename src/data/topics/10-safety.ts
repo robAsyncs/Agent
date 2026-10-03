@@ -46,7 +46,6 @@ export const safety: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'Try to break one of your own agents with prompt injection, then harden it.',
 }

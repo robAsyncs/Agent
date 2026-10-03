@@ -1,10 +1,11 @@
-import { Fragment } from 'react'
+import { Fragment, useRef } from 'react'
 import { Link, useParams } from 'react-router'
 import { CONCEPT_BY_KIND } from '../data/concepts'
 import { SCENARIOS } from '../data/scenarios'
 import { GROUPS, TOPIC_BY_ID, TOPICS } from '../data/topics'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import type { Section, Topic } from '../types'
+import { TopicBar } from '../components/TopicBar'
 import { NotFound } from './NotFound'
 
 const label = (t: Topic) => (t.number === null ? 'Final project' : `Topic ${t.number}`)
@@ -19,7 +20,7 @@ function Text({ children }: { children: string }) {
 function Outline({ sections }: { sections: Section[] }) {
   return sections.map((section, i) => (
     <section key={section.title} className="topic">
-      <h2>
+      <h2 data-section={section.title.replaceAll('`', '')} data-num={i + 1}>
         <span className="topic-num">{i + 1}</span>
         <Text>{section.title}</Text>
       </h2>
@@ -38,6 +39,8 @@ function Outline({ sections }: { sections: Section[] }) {
 export function TopicPage() {
   const { topicId = '' } = useParams()
   const topic = TOPIC_BY_ID[topicId]
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null)
   useDocumentTitle(topic?.title ?? 'Page not found')
 
   if (!topic) return <NotFound />
@@ -50,6 +53,13 @@ export function TopicPage() {
 
   return (
     <main className="app">
+      <TopicBar
+        key={topic.id}
+        label={label(topic)}
+        title={topic.title}
+        titleRef={titleRef}
+        bodyRef={bodyRef}
+      />
       <article className="module">
         <header className="page-head module-head">
           <Link className="crumb" to="/topics">
@@ -58,16 +68,16 @@ export function TopicPage() {
           <span className="module-meta">
             {label(topic)} · {group?.title}
           </span>
-          <h1>{topic.title}</h1>
+          <h1 ref={titleRef}>{topic.title}</h1>
           <p>{topic.summary}</p>
         </header>
 
-        <div className="module-body">
+        <div className="module-body" ref={bodyRef}>
           {topic.article ? <topic.article /> : <Outline sections={topic.sections} />}
 
           {(scenarios.length > 0 || topic.concepts) && (
             <section className="topic">
-              <h2>Interactive</h2>
+              <h2 data-section="Interactive">Interactive</h2>
               {scenarios.length > 0 && (
                 <div className="try-grid">
                   {scenarios.map((s) => (
@@ -100,10 +110,15 @@ export function TopicPage() {
 
           {topic.sources.length > 0 && (
             <section className="topic">
-              <h2>Sources</h2>
+              <h2 data-section="Sources">Sources</h2>
               <ul>
                 {topic.sources.map((s) => (
-                  <li key={s}>{s}</li>
+                  <li key={s.url}>
+                    <a className="source" href={s.url} target="_blank" rel="noopener noreferrer">
+                      {s.title}
+                      <span aria-hidden="true"> ↗</span>
+                    </a>
+                  </li>
                 ))}
               </ul>
             </section>

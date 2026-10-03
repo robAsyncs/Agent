@@ -47,8 +47,8 @@ export const agentLoop: Topic = {
     },
   ],
   sources: [
-    'The ReAct paper (Yao et al., 2022)',
-    'Anthropic\'s "Building Effective Agents"',
+    { title: 'Yao et al., "ReAct: Synergizing Reasoning and Acting in Language Models" (2022)', url: 'https://arxiv.org/abs/2210.03629' },
+    { title: 'Anthropic, "Building Effective Agents" (2024)', url: 'https://www.anthropic.com/engineering/building-effective-agents' },
   ],
   project: 'A from-scratch agent that can answer multi-step questions using web search and a calculator.',
   scenarios: ['weather', 'coding'],

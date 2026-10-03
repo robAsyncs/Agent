@@ -48,8 +48,9 @@ export const howLlmsWork: Topic = {
     },
   ],
   sources: [
-    'Andrej Karpathy\'s "Intro to Large Language Models" and "Deep Dive into LLMs" videos',
-    '3Blue1Brown\'s neural network series for intuition',
+    { title: 'Andrej Karpathy, "Intro to Large Language Models" (video)', url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g' },
+    { title: 'Andrej Karpathy, "Deep Dive into LLMs like ChatGPT" (video)', url: 'https://www.youtube.com/watch?v=7xTGNNLPyMI' },
+    { title: '3Blue1Brown, "Neural Networks" series', url: 'https://www.3blue1brown.com/topics/neural-networks' },
   ],
   project: 'Explain to a friend, without notes, why an LLM can confidently state something false.',
   concepts: ['llm_request', 'reasoning', 'context_management'],

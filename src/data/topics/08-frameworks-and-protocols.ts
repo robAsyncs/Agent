@@ -42,8 +42,7 @@ export const frameworksAndProtocols: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'Rebuild your Module 5 agent in a framework, then build an MCP server that exposes one of your own tools.',
   scenarios: ['coding'],
 }

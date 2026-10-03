@@ -73,6 +73,11 @@ export interface Section {
   body?: string
 }
 
+export interface Source {
+  title: string
+  url: string
+}
+
 export interface Topic {
   /** URL slug: /topics/<id> */
   id: string
@@ -85,7 +90,7 @@ export interface Topic {
   sections: Section[]
   /** A full long-form write-up, rendered instead of the outline. */
   article?: ComponentType
-  sources: string[]
+  sources: Source[]
   /** What I built for this topic. Omitted for conceptual topics. */
   project?: string
   /** Interactive scenarios (by id) and actions that illustrate this topic. */

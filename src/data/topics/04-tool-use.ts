@@ -39,8 +39,7 @@ export const toolUse: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'An assistant with three tools: a calculator, a weather lookup, and a note-saver that writes to a file.',
   scenarios: ['weather'],
   concepts: ['tool_selection', 'tool_call', 'tool_result', 'observe'],

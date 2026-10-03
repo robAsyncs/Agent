@@ -45,8 +45,9 @@ export const llmApis: Topic = {
     },
   ],
   sources: [
-    'Anthropic\'s prompt engineering docs and interactive tutorial',
-    'OpenAI\'s cookbook',
+    { title: 'Anthropic, prompt engineering overview', url: 'https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview' },
+    { title: 'Anthropic, interactive prompt engineering tutorial', url: 'https://github.com/anthropics/prompt-eng-interactive-tutorial' },
+    { title: 'OpenAI Cookbook', url: 'https://cookbook.openai.com/' },
   ],
   project: 'A command-line chatbot with conversation memory that can switch personas via the system prompt.',
   scenarios: ['weather'],

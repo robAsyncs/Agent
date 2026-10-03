@@ -49,8 +49,7 @@ export const memoryAndRag: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'A "chat with your documents" app that answers questions about a folder of PDFs and cites its sources.',
   scenarios: ['research', 'trip'],
   concepts: ['memory_read', 'memory_write', 'retrieval', 'context_management'],

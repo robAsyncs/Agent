@@ -47,7 +47,6 @@ export const evaluation: Topic = {
       ],
     },
   ],
-  sources: [
-  ],
+  sources: [],
   project: 'Write a 20-case evaluation suite for one of your earlier agents, measure it, make three improvements, and measure again.',
 }
