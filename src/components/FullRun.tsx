@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { usePlayback } from '../hooks/usePlayback'
-import type { ActionKind, Scenario } from '../types'
+import type { Scenario } from '../types'
 import { ContextWindow } from './ContextWindow'
 import { PlaybackControls } from './PlaybackControls'
 import { StepDetail } from './StepDetail'
@@ -11,10 +11,9 @@ interface Props {
   scenario: Scenario
   startAt: number
   onScenarioChange: (id: string) => void
-  onLearnMore: (kind: ActionKind) => void
 }
 
-export function FullRun({ scenarios, scenario, startAt, onScenarioChange, onLearnMore }: Props) {
+export function FullRun({ scenarios, scenario, startAt, onScenarioChange }: Props) {
   const pb = usePlayback(scenario.steps.length)
   const { jumpTo, next, prev, togglePlay } = pb
 
@@ -69,7 +68,6 @@ export function FullRun({ scenarios, scenario, startAt, onScenarioChange, onLear
             step={scenario.steps[pb.index]}
             index={pb.index}
             total={scenario.steps.length}
-            onLearnMore={onLearnMore}
           />
           <ContextWindow steps={scenario.steps} revealedUntil={pb.index} />
         </aside>

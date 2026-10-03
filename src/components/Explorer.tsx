@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { CONCEPT_BY_KIND, CONCEPTS } from '../data/concepts'
 import { CATEGORIES } from '../data/meta'
 import { occurrencesOf } from '../data/scenarios'
@@ -8,13 +9,7 @@ import { Timeline } from './Timeline'
 const GROUPS: Category[] = ['core', 'planning', 'memory']
 const ADVANCED_PREVIEW = ['Subagents / handoff', 'Reflection', 'Guardrails', 'Human-in-the-loop']
 
-interface Props {
-  selected: ActionKind
-  onSelect: (kind: ActionKind) => void
-  onOpenInRun: (scenarioId: string, stepIndex: number) => void
-}
-
-export function Explorer({ selected, onSelect, onOpenInRun }: Props) {
+export function Explorer({ selected }: { selected: ActionKind }) {
   const concept = CONCEPT_BY_KIND[selected]
   const seenIn = occurrencesOf(selected)
   // One link per scenario, pointing at the first occurrence.
@@ -28,14 +23,14 @@ export function Explorer({ selected, onSelect, onOpenInRun }: Props) {
           <div key={cat} className={`concept-group cat-${cat}`}>
             <h4>{CATEGORIES[cat].label}</h4>
             {CONCEPTS.filter((c) => c.category === cat).map((c) => (
-              <button
+              <Link
                 key={c.kind}
-                type="button"
+                to={`/reference/${c.kind}`}
                 className={c.kind === selected ? 'on' : ''}
-                onClick={() => onSelect(c.kind)}
+                aria-current={c.kind === selected ? 'page' : undefined}
               >
                 {c.title}
-              </button>
+              </Link>
             ))}
           </div>
         ))}
@@ -84,15 +79,15 @@ export function Explorer({ selected, onSelect, onOpenInRun }: Props) {
         </div>
 
         <section>
-          <h3>See it in a full run</h3>
+          <h3>In the playground</h3>
           {firstPerScenario.length === 0 ? (
-            <p className="muted">None of the current scenarios use this action yet.</p>
+            <p className="muted">Not in any scenario yet.</p>
           ) : (
             <div className="seen-in">
               {firstPerScenario.map(({ scenario, index }) => (
-                <button key={scenario.id} type="button" onClick={() => onOpenInRun(scenario.id, index)}>
+                <Link key={scenario.id} to={`/playground/${scenario.id}?step=${index + 1}`}>
                   {scenario.title} · step {index + 1} →
-                </button>
+                </Link>
               ))}
             </div>
           )}

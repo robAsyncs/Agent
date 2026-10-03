@@ -59,3 +59,31 @@ export interface Concept {
     steps: Step[]
   }
 }
+
+// ─── Topics ──────────────────────────────────────────────────
+
+export type GroupId = 'foundations' | 'agents' | 'advanced' | 'production' | 'final'
+
+export interface Section {
+  title: string
+  points: string[]
+  /** Write-up for this section. */
+  body?: string
+}
+
+export interface Topic {
+  /** URL slug: /topics/<id> */
+  id: string
+  /** null for the final project. */
+  number: number | null
+  title: string
+  group: GroupId
+  summary: string
+  sections: Section[]
+  sources: string[]
+  /** What I built for this topic. Omitted for conceptual topics. */
+  project?: string
+  /** Interactive scenarios (by id) and actions that illustrate this topic. */
+  scenarios?: string[]
+  concepts?: ActionKind[]
+}

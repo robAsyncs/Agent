@@ -12,20 +12,14 @@ export function ContextWindow({ steps, revealedUntil }: { steps: Step[]; reveale
     <section className="panel context">
       <div className="context-head">
         <h3>Context window</h3>
-        <span className="muted small">
+        <span className="muted small" title="Demo scale: real models allow 200k+ tokens">
           ~{used} / {LIMIT} tokens
         </span>
       </div>
       <div className="meter" aria-hidden="true">
         <div className="meter-fill" style={{ width: `${pct}%` }} />
       </div>
-      <p className="muted small">
-        What the model sees on its next call. All of it is re-sent every time. (Demo scale: real
-        models allow 200k+ tokens.)
-      </p>
-      {entries.length === 0 ? (
-        <p className="muted small">Empty</p>
-      ) : (
+      {entries.length > 0 && (
         <ol className="context-list">
           {entries.map((e, i) => (
             <li key={i} className={`ctx ctx-${e.role}`}>

@@ -8,20 +8,25 @@ npm install
 npm run dev
 ```
 
-## Two ways to learn
+## Pages
 
-- **Full run**: pick a scenario (Weather, Trip planner, Research with RAG, Coding agent) and step
-  through it as a sequence diagram with lanes for User · Agent · LLM · Tools · Memory.
-  Controls: ▶ play/pause (space), ◀ ▶ step (← →), speed 0.5–4×. Click any row to jump to it.
-  The side panel shows the raw payload of each step and how the context window grows.
-- **Explore actions**: pick a single action to see it in isolation, with an explanation, why it
-  matters, an example payload, and links to where it appears in the full runs.
+| URL | What |
+| --- | --- |
+| `/` | Home: project title, then the list of topics |
+| `/topics`, `/topics/:topicId` | One page per topic from `ai-agents-learning-outline.md`: notes, interactive demos, what I built, sources |
+| `/playground/:scenarioId?step=N` | Step through a scripted agent run as a sequence diagram (User · Agent · LLM · Tools · Memory). ▶ play/pause (space), step (← →), speed 0.5–4× |
+| `/reference/:kind` | Each agent action on its own: explanation, example payload, and where it appears in the playground |
+
+Routing uses React Router with real paths, so the host must serve `index.html` for unknown paths
+(Vite's dev and preview servers already do; on Netlify/Vercel/etc. add an SPA rewrite).
 
 ## Where things live
 
 | Path | What |
 | --- | --- |
-| `src/types.ts` | `Step`, `Scenario`, `Concept`, action kinds, and lanes |
+| `src/router.tsx` | Route table |
+| `src/pages/` | One component per route |
+| `src/data/topics/` | Topic content, one file per topic. Add write-ups in each section's `body` |
 | `src/data/concepts.ts` | The explainer text + example for every action |
 | `src/data/scenarios/` | Scripted runs, one file per scenario |
 | `src/components/Timeline.tsx` | The sequence diagram |
