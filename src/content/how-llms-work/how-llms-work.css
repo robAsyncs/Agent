@@ -1,0 +1,446 @@
+/* Topic 2: How Large Language Models Work. Every class is prefixed with llm-. */
+
+/* Tokenizer */
+
+.llm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.llm-field input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.llm-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.llm-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 2.5em;
+  margin: 0 0 14px !important;
+  font-family: var(--mono);
+  font-size: 0.9375rem !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0;
+}
+
+.llm-token {
+  padding: 3px 6px;
+  border-radius: 6px;
+  white-space: pre;
+  animation: llm-pop 0.25s var(--ease);
+}
+
+.llm-token.c0 {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.llm-token.c1 {
+  background: color-mix(in srgb, var(--core) 18%, transparent);
+}
+.llm-token.c2 {
+  background: color-mix(in srgb, var(--memory) 20%, transparent);
+}
+.llm-token.c3 {
+  background: color-mix(in srgb, var(--planning) 12%, transparent);
+}
+.llm-token.c4 {
+  background: var(--surface-2);
+}
+
+@keyframes llm-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.llm-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 14px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.llm-stats strong {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.llm-slider-wide {
+  margin-left: 0;
+  flex: 1;
+}
+
+.llm-slider-wide input {
+  flex: 1;
+  width: auto;
+  min-width: 120px;
+}
+
+.llm-merges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.llm-merge {
+  white-space: nowrap;
+}
+
+/* Sampler */
+
+.llm-prompt {
+  margin: 0 0 16px !important;
+  font-family: var(--serif);
+  font-size: 1.375rem !important;
+  line-height: 1.4 !important;
+}
+
+.llm-blank {
+  margin-left: 6px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.llm-bar-row {
+  display: grid;
+  grid-template-columns: 84px 1fr 52px;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 8px;
+}
+
+.llm-bar-row .bar-track {
+  position: relative;
+}
+
+.llm-ghost {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--border-strong) 0 3px,
+    transparent 3px 6px
+  );
+}
+
+.llm-cut .bar-word,
+.llm-cut .bar-value {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.llm-slider {
+  margin-left: 0;
+}
+
+.llm-sample-row {
+  margin-top: 12px;
+}
+
+.llm-samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.llm-sample {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 0.8125rem;
+}
+
+.llm-sample.new {
+  background: var(--ink);
+  color: var(--on-ink);
+  animation: llm-pop 0.3s var(--ease);
+}
+
+/* Context window */
+
+.llm-window {
+  margin: 16px 0 0;
+  padding: 14px;
+  border: 1.5px dashed var(--border-strong);
+  border-radius: 16px;
+}
+
+.llm-window-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.llm-window-head span:last-child {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.llm-hot {
+  color: var(--accent);
+}
+
+.llm-msgs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.llm-msg {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 0.8125rem;
+  animation: llm-in 0.35s var(--ease);
+}
+
+@keyframes llm-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.llm-role {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.llm-system .llm-role {
+  color: var(--accent);
+}
+
+.llm-summary {
+  background: color-mix(in srgb, var(--memory) 14%, var(--surface));
+}
+
+.llm-summary .llm-role {
+  color: var(--memory);
+}
+
+.llm-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.llm-count {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.llm-error {
+  margin: 10px 0 0 !important;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, #d14 12%, transparent);
+  color: color-mix(in srgb, #d14 80%, var(--text));
+  font-family: var(--mono);
+  font-size: 0.75rem !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0;
+  animation: llm-in 0.3s var(--ease);
+}
+
+.llm-forgotten {
+  margin-top: 12px;
+}
+
+.llm-forgotten ol {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.llm-forgotten li {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--border-strong);
+  animation: llm-in 0.35s var(--ease);
+}
+
+/* Training pipeline */
+
+.llm-pipeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.llm-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.llm-stage + .llm-stage::before {
+  content: '→';
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-size: 1.125rem;
+}
+
+.llm-stage-num {
+  font-family: var(--serif);
+  color: var(--muted);
+}
+
+.llm-stage strong {
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.llm-stage dl {
+  margin: 0;
+  flex: 1;
+}
+
+.llm-stage dt {
+  margin-top: 8px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.llm-stage dd {
+  margin: 2px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.llm-share {
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.llm-share span {
+  display: block;
+  height: 100%;
+  min-width: 4px;
+  background: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .llm-pipeline {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+  .llm-stage + .llm-stage::before {
+    content: '↓';
+    left: 50%;
+    top: -22px;
+    transform: translateX(-50%);
+  }
+}
+
+/* Landscape table */
+
+.llm-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.llm-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.llm-table th,
+.llm-table td {
+  padding: 11px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--border);
+}
+
+.llm-table thead th {
+  border-top: 0;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.llm-table tbody th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .llm-msg {
+    grid-template-columns: 58px minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+  .llm-window {
+    padding: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .llm-token,
+  .llm-sample.new,
+  .llm-msg,
+  .llm-error,
+  .llm-forgotten li {
+    animation: none;
+  }
+}
