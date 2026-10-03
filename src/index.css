@@ -2409,7 +2409,7 @@ button:focus-visible {
   left: 0;
   right: 0;
   z-index: 9;
-  background: var(--nav-bg);
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--border);
@@ -2444,6 +2444,7 @@ button:focus-visible {
 
 .topic-bar-title {
   display: flex;
+  flex: 0 1 auto;
   align-items: baseline;
   gap: 10px;
   min-width: 0;
@@ -2461,6 +2462,7 @@ button:focus-visible {
 }
 
 .topic-bar-title strong {
+  min-width: 0;
   font-family: var(--serif);
   font-size: 1.0625rem;
   font-weight: 500;
@@ -2474,6 +2476,9 @@ button:focus-visible {
 }
 
 .topic-bar-section {
+  /* The section label keeps its space; the topic title truncates first. */
+  flex: none;
+  max-width: 50%;
   display: flex;
   align-items: baseline;
   gap: 8px;
