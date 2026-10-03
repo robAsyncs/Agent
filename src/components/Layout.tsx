@@ -12,7 +12,7 @@ export function Layout() {
       <header className="nav">
         <div className="nav-inner">
           <Link className="wordmark" to="/">
-            Agent Anatomy
+            Under the Harness
           </Link>
           <nav className="mode-switch" aria-label="Sections">
             {NAV.map((item) => (

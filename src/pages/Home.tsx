@@ -9,7 +9,7 @@ export function Home() {
   return (
     <div className="home">
       <section className="home-hero">
-        <h1>Agent Anatomy</h1>
+        <h1>Under the Harness</h1>
         <p>A semester project on how AI agents work.</p>
         <a className="scroll-cue" href="#topics" aria-label="Scroll to topics">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">

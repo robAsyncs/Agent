@@ -1,4 +1,4 @@
-# Agent Anatomy
+# Under the Harness
 
 An interactive visualizer for what an AI agent does under the hood: system prompt injection,
 user prompts, planning, tool use, the observe loop, memory and retrieval.

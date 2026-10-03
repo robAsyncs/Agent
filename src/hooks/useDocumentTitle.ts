@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SITE = 'Agent Anatomy'
+const SITE = 'Under the Harness'
 
 export function useDocumentTitle(title?: string) {
   useEffect(() => {
