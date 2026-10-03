@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-const QUESTION = 'Should I bring an umbrella in Addis Ababa this afternoon?'
+const QUESTION = 'Should I bring an umbrella in Lisbon this afternoon?'
 
 const CHATBOT_REPLY =
-  "I can't check live weather. Addis Ababa's main rainy season runs from June to September, so if you're there during those months, an umbrella is a good idea."
+  "I can't check live weather. Lisbon gets most of its rain between November and January, so if you're there in those months, an umbrella is a good idea."
 
 const AGENT_STEPS = [
-  { who: 'Model', kind: 'tool_use', text: 'get_weather({ "city": "Addis Ababa" })' },
+  { who: 'Model', kind: 'tool_use', text: 'get_weather({ "city": "Lisbon" })' },
   { who: 'Harness', kind: 'tool_result', text: '{ "temp_c": 18, "rain_chance": 0.7, "rain_window": "15:00–18:00" }' },
   { who: 'Model', kind: 'answer', text: 'Yes. There is a 70% chance of rain between 3 and 6 pm, so bring an umbrella.' },
 ]

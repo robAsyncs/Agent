@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 const SYSTEM = 'You are a concise travel assistant.'
 
 const TURNS = [
-  { user: 'What is the capital of Ethiopia?', reply: 'The capital of Ethiopia is Addis Ababa.' },
+  { user: 'What is the capital of Ecuador?', reply: 'The capital of Ecuador is Quito.' },
   {
     user: 'How high is it?',
     reply:
-      'Addis Ababa sits at about 2,355 meters (7,700 ft) above sea level, which makes it one of the highest capital cities in the world.',
+      'Quito sits at about 2,850 meters (9,350 ft) above sea level, which makes it one of the highest capital cities in the world.',
   },
 ]
 

@@ -21,7 +21,7 @@ const NODES: { id: NodeId; x: number; y: number; title: string; sub?: string }[]
 
 /** A two-tool task. Each stage travels one edge and lands on one node; `iteration` is the model call. */
 const STAGES: { edge: EdgeId; node: NodeId; iteration: number; caption: string }[] = [
-  { edge: 'start', node: 'think', iteration: 1, caption: 'Task: “Plan a picnic in Addis Ababa tomorrow.” The model reads it.' },
+  { edge: 'start', node: 'think', iteration: 1, caption: 'Task: “Plan a picnic in Melbourne tomorrow.” The model reads it.' },
   { edge: 'use', node: 'act', iteration: 1, caption: 'The model needs the forecast, so it replies with get_weather(...).' },
   { edge: 'result', node: 'observe', iteration: 1, caption: 'The harness runs the tool: sunny, 24 °C.' },
   { edge: 'context', node: 'think', iteration: 2, caption: 'The result is added to the context and the model is called again.' },

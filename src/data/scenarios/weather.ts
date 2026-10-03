@@ -21,10 +21,10 @@ export const weather: Scenario = {
       kind: 'user_prompt',
       from: 'user',
       to: 'agent',
-      label: '"Weather in Addis? Umbrella?"',
+      label: '"Weather in Lisbon? Umbrella?"',
       note: 'The user asks a question that needs live data the model does not have.',
-      payload: { role: 'user', content: 'What\'s the weather in Addis Ababa today? Do I need an umbrella?' },
-      context: ctx('user', '"Weather in Addis Ababa…"', 'What\'s the weather in Addis Ababa today? Do I need an umbrella?'),
+      payload: { role: 'user', content: 'What\'s the weather in Lisbon today? Do I need an umbrella?' },
+      context: ctx('user', '"Weather in Lisbon…"', 'What\'s the weather in Lisbon today? Do I need an umbrella?'),
     },
     {
       kind: 'llm_request',
@@ -42,7 +42,7 @@ export const weather: Scenario = {
             input_schema: { type: 'object', properties: { city: { type: 'string' } }, required: ['city'] },
           },
         ],
-        messages: [{ role: 'user', content: 'What\'s the weather in Addis Ababa today? Do I need an umbrella?' }],
+        messages: [{ role: 'user', content: 'What\'s the weather in Lisbon today? Do I need an umbrella?' }],
       },
     },
     {
@@ -52,7 +52,7 @@ export const weather: Scenario = {
       label: 'thinking…',
       note: 'The model realises it cannot know today\'s weather from training data and decides to use the tool.',
       payload:
-        'User wants today\'s weather in Addis Ababa plus umbrella advice. I don\'t have live data. The get_weather tool fits exactly: call it with city="Addis Ababa".',
+        'User wants today\'s weather in Lisbon plus umbrella advice. I don\'t have live data. The get_weather tool fits exactly: call it with city="Lisbon".',
     },
     {
       kind: 'tool_selection',
@@ -61,18 +61,18 @@ export const weather: Scenario = {
       label: 'tool_use: get_weather',
       note: 'Instead of text, the model returns a tool_use block and stops. stop_reason "tool_use" tells the harness to run a tool.',
       payload: {
-        content: [{ type: 'tool_use', id: 'toolu_01', name: 'get_weather', input: { city: 'Addis Ababa' } }],
+        content: [{ type: 'tool_use', id: 'toolu_01', name: 'get_weather', input: { city: 'Lisbon' } }],
         stop_reason: 'tool_use',
       },
-      context: ctx('assistant', 'tool_use get_weather', { name: 'get_weather', input: { city: 'Addis Ababa' } }),
+      context: ctx('assistant', 'tool_use get_weather', { name: 'get_weather', input: { city: 'Lisbon' } }),
     },
     {
       kind: 'tool_call',
       from: 'agent',
       to: 'tools',
-      label: 'get_weather("Addis Ababa")',
+      label: 'get_weather("Lisbon")',
       note: 'The harness, not the model, executes the real function: here an HTTP call to a weather API.',
-      payload: 'GET https://api.weather.example/v1/forecast?city=Addis%20Ababa',
+      payload: 'GET https://api.weather.example/v1/forecast?city=Lisbon',
     },
     {
       kind: 'tool_result',
@@ -118,12 +118,12 @@ export const weather: Scenario = {
         content: [
           {
             type: 'text',
-            text: 'It\'s 18°C and cloudy in Addis Ababa. Yes, bring an umbrella: there\'s a 70% chance of rain between 3 and 6 pm.',
+            text: 'It\'s 18°C and cloudy in Lisbon. Yes, bring an umbrella: there\'s a 70% chance of rain between 3 and 6 pm.',
           },
         ],
         stop_reason: 'end_turn',
       },
-      context: ctx('assistant', 'final answer', 'It\'s 18°C and cloudy in Addis Ababa. Yes, bring an umbrella: there\'s a 70% chance of rain between 3 and 6 pm.'),
+      context: ctx('assistant', 'final answer', 'It\'s 18°C and cloudy in Lisbon. Yes, bring an umbrella: there\'s a 70% chance of rain between 3 and 6 pm.'),
     },
     {
       kind: 'final_response',
@@ -131,7 +131,7 @@ export const weather: Scenario = {
       to: 'user',
       label: '"Yes, bring an umbrella"',
       note: 'The harness shows the answer. The whole exchange took two model calls and one tool call.',
-      payload: 'It\'s 18°C and cloudy in Addis Ababa. Yes, bring an umbrella: there\'s a 70% chance of rain between 3 and 6 pm.',
+      payload: 'It\'s 18°C and cloudy in Lisbon. Yes, bring an umbrella: there\'s a 70% chance of rain between 3 and 6 pm.',
     },
   ],
 }
