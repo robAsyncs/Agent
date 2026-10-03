@@ -4,7 +4,7 @@ import { CONCEPT_BY_KIND } from '../data/concepts'
 import { SCENARIOS } from '../data/scenarios'
 import { GROUPS, TOPIC_BY_ID, TOPICS } from '../data/topics'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
-import type { Topic } from '../types'
+import type { Section, Topic } from '../types'
 import { NotFound } from './NotFound'
 
 const label = (t: Topic) => (t.number === null ? 'Final project' : `Topic ${t.number}`)
@@ -14,6 +14,25 @@ function Text({ children }: { children: string }) {
   return children
     .split('`')
     .map((part, i) => (i % 2 ? <code key={i}>{part}</code> : <Fragment key={i}>{part}</Fragment>))
+}
+
+function Outline({ sections }: { sections: Section[] }) {
+  return sections.map((section, i) => (
+    <section key={section.title} className="topic">
+      <h2>
+        <span className="topic-num">{i + 1}</span>
+        <Text>{section.title}</Text>
+      </h2>
+      {section.body && <p>{section.body}</p>}
+      <ul>
+        {section.points.map((point) => (
+          <li key={point}>
+            <Text>{point}</Text>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))
 }
 
 export function TopicPage() {
@@ -44,22 +63,7 @@ export function TopicPage() {
         </header>
 
         <div className="module-body">
-          {topic.sections.map((section, i) => (
-            <section key={section.title} className="topic">
-              <h2>
-                <span className="topic-num">{i + 1}</span>
-                <Text>{section.title}</Text>
-              </h2>
-              {section.body && <p>{section.body}</p>}
-              <ul>
-                {section.points.map((point) => (
-                  <li key={point}>
-                    <Text>{point}</Text>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+          {topic.article ? <topic.article /> : <Outline sections={topic.sections} />}
 
           {(scenarios.length > 0 || topic.concepts) && (
             <section className="topic">

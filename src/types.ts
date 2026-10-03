@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react'
+
 export type LaneId = 'user' | 'agent' | 'llm' | 'tools' | 'memory'
 
 export type Category = 'core' | 'planning' | 'memory'
@@ -79,7 +81,10 @@ export interface Topic {
   title: string
   group: GroupId
   summary: string
+  /** Bullet-point outline. Ignored when `article` is set. */
   sections: Section[]
+  /** A full long-form write-up, rendered instead of the outline. */
+  article?: ComponentType
   sources: string[]
   /** What I built for this topic. Omitted for conceptual topics. */
   project?: string
