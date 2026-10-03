@@ -37,20 +37,22 @@ export function FullRun({ scenarios, scenario, startAt, onScenarioChange }: Prop
 
   return (
     <div className="full-run">
-      <div className="scenario-tabs" role="tablist">
-        {scenarios.map((s) => (
-          <button
-            key={s.id}
-            type="button"
-            role="tab"
-            aria-selected={s.id === scenario.id}
-            className={s.id === scenario.id ? 'on' : ''}
-            onClick={() => onScenarioChange(s.id)}
-          >
-            <strong>{s.title}</strong>
-            <span>{s.tagline}</span>
-          </button>
-        ))}
+      <div className="scenario-bar">
+        <div className="scenario-switch" role="tablist" aria-label="Scenario">
+          {scenarios.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              role="tab"
+              aria-selected={s.id === scenario.id}
+              className={s.id === scenario.id ? 'on' : ''}
+              onClick={() => onScenarioChange(s.id)}
+            >
+              {s.title}
+            </button>
+          ))}
+        </div>
+        <p className="scenario-tagline">{scenario.tagline}</p>
       </div>
 
       <div className="run-grid">

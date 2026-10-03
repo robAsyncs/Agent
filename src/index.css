@@ -437,45 +437,96 @@ button:focus-visible {
 
 /* ─── Full run ───────────────────────────────────────────── */
 
-.scenario-tabs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-bottom: 28px;
-}
-
-.scenario-tabs button {
-  text-align: left;
+/* The playground fills exactly one screen below the nav on desktop. */
+.playground {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 18px 20px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  /* 56px nav + its 1px border */
+  height: calc(100dvh - 57px);
+  min-height: 560px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.playground .full-run {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.playground .run-grid {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+
+@media (max-width: 960px) {
+  .playground {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+}
+
+.scenario-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+}
+
+.scenario-switch {
+  display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.scenario-switch button {
+  flex: none;
+  border: 0;
   background: transparent;
-}
-
-.scenario-tabs button strong {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-
-.scenario-tabs button span {
+  padding: 6px 14px;
+  border-radius: 999px;
   font-size: 0.875rem;
-  line-height: 1.4;
+  font-weight: 500;
   color: var(--muted);
 }
 
-.scenario-tabs button:hover {
-  background: var(--surface);
+.scenario-switch button:hover {
+  color: var(--text);
 }
 
-.scenario-tabs button.on {
+.scenario-switch button.on {
   background: var(--surface);
-  border-color: var(--ink);
-  box-shadow: inset 0 0 0 1px var(--ink);
+  color: var(--text);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.06),
+    0 2px 8px rgb(0 0 0 / 0.06);
+}
+
+.scenario-tagline {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .run-grid {

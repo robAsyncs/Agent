@@ -17,10 +17,8 @@ export function Playground() {
   const startAt = Number.isInteger(step) && step >= 1 && step <= scenario.steps.length ? step - 1 : -1
 
   return (
-    <main className="app">
-      <header className="page-head">
-        <h1>Playground</h1>
-      </header>
+    <main className="app playground">
+      <h1 className="sr-only">Playground</h1>
       <FullRun
         scenarios={SCENARIOS}
         scenario={scenario}
