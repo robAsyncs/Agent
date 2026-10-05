@@ -183,8 +183,13 @@
    - Parallelization
    - Evaluator-optimizer loops
 2. Planning
-   - Task decomposition
-   - Dynamic replanning when things go wrong
+   - Goal decomposition: breaking a goal into subgoals and tasks
+   - Search-based planning: states, actions and searching for a path to the goal (STRIPS, A*), and LLM versions such as Tree of Thoughts and tree search
+   - Planning graphs: Graphplan and why explicit search gets expensive
+   - ReAct: choosing one step at a time instead of searching (recap of Module 5)
+   - Plan-and-execute: a plan written up front, with dynamic replanning when things go wrong
+   - Hierarchical planning: high-level plans refined into subtasks, the bridge to orchestrator-worker systems
+   - Planning with memory: keeping plans and progress in a scratchpad, reusing past plans and skills
 3. Multi-agent systems
    - Orchestrator-worker setups
    - Specialist agents and handoffs
