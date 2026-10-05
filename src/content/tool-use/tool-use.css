@@ -1,0 +1,220 @@
+/* Topic 4: Tool Use. Every class is prefixed with tu-. Code blocks and step cards reuse Topic 3's api- styles. */
+
+/* Four-step flow */
+
+.tu-flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  counter-reset: none;
+}
+
+@media (max-width: 720px) {
+  .tu-flow {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.tu-flow-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 14px 16px;
+  border-radius: var(--radius-sm);
+  border-top: 3px solid var(--step);
+  background: color-mix(in srgb, var(--step) 7%, var(--surface));
+  font-size: 0.875rem;
+}
+
+.tu-flow-app {
+  --step: var(--advanced);
+}
+.tu-flow-model {
+  --step: var(--core);
+}
+
+.tu-flow-num {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  color: var(--muted);
+}
+
+.tu-flow-who {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--step);
+}
+
+.tu-flow-body {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* Shared toggle row */
+
+.tu-controls {
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.tu-total {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* Description comparison */
+
+.tu-desc-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  animation: row-in 0.35s var(--ease);
+}
+
+@media (max-width: 720px) {
+  .tu-desc-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.tu-desc-tool {
+  min-width: 0;
+}
+
+.tu-desc-tool .api-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.tu-verdict {
+  margin: 6px 0 0 !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.5 !important;
+  color: var(--muted);
+}
+
+/* Parallel timing */
+
+.tu-gantt {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tu-gantt li {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .tu-gantt li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+.tu-gantt-name {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.tu-gantt-track {
+  position: relative;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.tu-gantt-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--planning) 22%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--planning) 50%, transparent);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  white-space: nowrap;
+  transition: left 0.45s var(--ease);
+}
+
+.tu-gantt + .api-pane-label + .api-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Before / after */
+
+.tu-ba {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .tu-ba {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.tu-ba-col {
+  min-width: 0;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--side);
+  background: color-mix(in srgb, var(--side) 5%, var(--surface));
+}
+
+.tu-ba-col.bad {
+  --side: #c2412d;
+}
+.tu-ba-col.good {
+  --side: var(--memory);
+}
+
+.tu-ba-col .api-pane-label {
+  color: var(--side);
+}
+
+.tu-ba-col .api-code {
+  background: var(--surface-2);
+}
+
+.tu-ba-col .api-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.tu-ba-note {
+  margin: 10px 0 0 !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.5 !important;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tu-desc-cols {
+    animation: none;
+  }
+  .tu-gantt-bar {
+    transition: none;
+  }
+}

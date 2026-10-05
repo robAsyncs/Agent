@@ -1,6 +1,7 @@
 import { CORE_TERMS } from './core'
 import { HOW_LLMS_WORK_TERMS } from './how-llms-work'
 import { LLM_APIS_TERMS } from './llm-apis'
+import { TOOL_USE_TERMS } from './tool-use'
 import type { GlossaryEntry } from './types'
 
 export type { GlossaryEntry } from './types'
@@ -10,6 +11,7 @@ export const GLOSSARY = {
   ...CORE_TERMS,
   ...HOW_LLMS_WORK_TERMS,
   ...LLM_APIS_TERMS,
+  ...TOOL_USE_TERMS,
 } satisfies Record<string, GlossaryEntry>
 
 export type GlossaryId = keyof typeof GLOSSARY
