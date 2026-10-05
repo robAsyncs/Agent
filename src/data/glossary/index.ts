@@ -1,3 +1,4 @@
+import { AGENT_LOOP_TERMS } from './agent-loop'
 import { CORE_TERMS } from './core'
 import { HOW_LLMS_WORK_TERMS } from './how-llms-work'
 import { LLM_APIS_TERMS } from './llm-apis'
@@ -12,6 +13,7 @@ export const GLOSSARY = {
   ...HOW_LLMS_WORK_TERMS,
   ...LLM_APIS_TERMS,
   ...TOOL_USE_TERMS,
+  ...AGENT_LOOP_TERMS,
 } satisfies Record<string, GlossaryEntry>
 
 export type GlossaryId = keyof typeof GLOSSARY

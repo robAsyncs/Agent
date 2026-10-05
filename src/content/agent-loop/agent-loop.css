@@ -1,0 +1,287 @@
+/* Topic 5: The Agent Loop. Every class is prefixed with agl-. Code blocks reuse Topic 3's api- styles. */
+
+/* Autonomy spectrum */
+
+.agl-spectrum ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 720px) {
+  .agl-spectrum ol {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.agl-spectrum li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border-top: 3px solid color-mix(in srgb, var(--accent) calc(25% + var(--lvl) * 75%), var(--border-strong));
+  background: color-mix(in srgb, var(--accent) calc(var(--lvl) * 9%), var(--surface));
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.agl-spectrum strong {
+  font-size: 0.9375rem;
+}
+
+.agl-spectrum em {
+  margin-top: auto;
+  color: var(--muted);
+}
+
+.agl-spectrum-axis {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1.5px solid var(--border-strong);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.agl-spectrum-axis::after {
+  content: '';
+  position: absolute;
+  top: -5.5px;
+  right: 0;
+  border: 4.5px solid transparent;
+  border-left: 8px solid var(--border-strong);
+  border-right: 0;
+}
+
+.agl-spectrum-axis span:last-child {
+  text-align: right;
+}
+
+/* Stopping conditions list */
+
+.agl-stops {
+  margin-bottom: 20px;
+}
+
+/* Loop run */
+
+.agl-run-head {
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.agl-run-head .msg.user {
+  max-width: 100%;
+}
+
+.agl-run-head .slider {
+  margin-left: 0;
+}
+
+.agl-iters {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.agl-iter {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  animation: row-in 0.35s var(--ease);
+}
+
+.agl-iter-head {
+  display: grid;
+  grid-template-columns: auto minmax(40px, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.agl-meter {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.agl-meter span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.agl-tokens {
+  font-weight: 400;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.agl-line {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin: 0 0 4px !important;
+  font-size: 0.875rem !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere;
+}
+
+.agl-line code {
+  background: none;
+  padding: 0;
+}
+
+.agl-tag {
+  flex: none;
+  width: 64px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.agl-tag.think {
+  color: var(--core);
+}
+.agl-tag.act {
+  color: var(--planning);
+}
+.agl-tag.observe {
+  color: var(--memory);
+}
+
+.agl-iter .msg.assistant {
+  margin-top: 8px;
+  background: var(--surface);
+}
+
+.agl-stop {
+  border-left: 3px solid #c2412d;
+  background: color-mix(in srgb, #c2412d 7%, var(--surface));
+  font-size: 0.875rem;
+}
+
+/* Traces (patterns and failure modes) */
+
+.agl-tabs-head {
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.agl-trace {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: row-in 0.35s var(--ease);
+}
+
+.agl-trace-line {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--tag);
+  background: color-mix(in srgb, var(--tag) 6%, var(--surface));
+  font-size: 0.875rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .agl-trace-line {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+
+.agl-trace-line code {
+  background: none;
+  padding: 0;
+  font-size: 0.8125rem;
+}
+
+.agl-trace-tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tag);
+}
+
+.agl-t-thought,
+.agl-t-plan,
+.agl-t-replan {
+  --tag: var(--core);
+}
+.agl-t-action {
+  --tag: var(--planning);
+}
+.agl-t-observation {
+  --tag: var(--memory);
+}
+.agl-t-critique,
+.agl-t-harness {
+  --tag: var(--accent);
+}
+.agl-t-answer {
+  --tag: var(--muted);
+}
+
+.agl-t-harness {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+
+.agl-proscons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.agl-proscons div {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+
+.agl-proscons dt {
+  margin-bottom: 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.agl-proscons dd {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agl-iter,
+  .agl-trace {
+    animation: none;
+  }
+}
