@@ -859,6 +859,218 @@ button:focus-visible {
   }
 }
 
+/* ─── Harness cross-section (home hero) ──────────────────── */
+
+.harness {
+  width: min(78vw, 38dvh, 360px);
+  margin-bottom: 8px;
+  animation: fade-up 0.9s var(--ease);
+}
+
+.harness svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.h-track {
+  fill: none;
+  stroke: var(--ring);
+  stroke-opacity: 0.5;
+  stroke-width: 1.25;
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  animation: h-spin linear infinite;
+}
+
+.h-glow {
+  fill: none;
+  stroke: var(--ring);
+  stroke-width: 2.5;
+  opacity: 0;
+}
+
+.h-glow.hit {
+  animation: h-hit 1.1s var(--ease);
+}
+
+.h-label,
+.h-label-knockout {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  fill: var(--muted);
+}
+
+/* Drawn first, so the ring stroke is hidden behind the curved label without clipping its letters. */
+.h-label-knockout {
+  fill: var(--bg);
+  stroke: var(--bg);
+  stroke-width: 7px;
+  stroke-linejoin: round;
+}
+
+.h-tool-node {
+  fill: var(--bg);
+  stroke: var(--core);
+  stroke-width: 1.5;
+}
+
+.h-tool-pulse {
+  fill: var(--core);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.h-tool.hit .h-tool-pulse {
+  animation: h-ping 0.8s ease-out;
+}
+
+.h-tool.hit .h-tool-node {
+  animation: h-fill 0.8s var(--ease);
+}
+
+.h-tool-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: var(--muted);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.h-deposit {
+  fill: var(--memory);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: h-deposit 0.6s var(--ease);
+}
+
+.h-packet,
+.h-trail {
+  --pc: var(--text);
+}
+
+.h-packet circle {
+  fill: var(--pc);
+}
+
+.h-packet .h-packet-halo {
+  opacity: 0.18;
+}
+
+.h-trail {
+  stroke: var(--pc);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.h-core-body {
+  fill: var(--ink);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: h-breathe 4.5s ease-in-out infinite;
+}
+
+.h-core-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  fill: var(--on-ink);
+}
+
+.h-halo {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.h-core.thinking .h-halo {
+  animation: h-halo 1s ease-out infinite;
+}
+
+.harness-caption {
+  height: 1.5em;
+  margin: 6px 0 28px;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+@keyframes h-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes h-hit {
+  0% {
+    opacity: 0.9;
+    stroke-width: 4;
+  }
+  100% {
+    opacity: 0;
+    stroke-width: 1.25;
+  }
+}
+
+@keyframes h-ping {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+@keyframes h-fill {
+  0%,
+  60% {
+    fill: var(--core);
+  }
+}
+
+@keyframes h-deposit {
+  from {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+@keyframes h-breathe {
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes h-halo {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .harness,
+  .h-track,
+  .h-core-body {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .row,
   .arrow,

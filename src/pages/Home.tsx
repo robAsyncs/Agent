@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { HarnessDiagram } from '../components/HarnessDiagram'
 import { TopicList } from '../components/TopicList'
 import { GROUPS, topicsIn } from '../data/topics'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
@@ -9,6 +10,7 @@ export function Home() {
   return (
     <div className="home">
       <section className="home-hero">
+        <HarnessDiagram />
         <h1>Under the Harness</h1>
         <p>A semester project on how AI agents work.</p>
         <a className="scroll-cue" href="#topics" aria-label="Scroll to topics">
